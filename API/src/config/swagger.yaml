@@ -34,12 +34,12 @@ paths:
                   type: string
                 password:
                   type: string
-            examples:
+            example:
               firstName: Albus
               lastName: Dambldori
               birthday: "1935-08-18"
               email: albus@newage.io
-              password: "harry"
+              password: "harry potter"
       responses:
-        "200":
-          description: new invoice add successfully
+        "201":
+          description: new user create successfully

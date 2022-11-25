@@ -26,10 +26,6 @@ const userSchema = new Schema<UserType>({
     type: Schema.Types.String,
     required: true,
   },
-  confirmed: {
-    type: Schema.Types.Boolean,
-    required: true,
-  },
 });
 
 const User = model<UserType>("User", userSchema);
