@@ -1,10 +1,9 @@
 {
   "name": "new-age-api",
   "version": "1.0.0",
-  "description": "",
   "main": "build/app.js",
   "scripts": {
-    "start": "node build/server.js",
+    "start": "node build/app.js",
     "build": "babel src --out-dir build --extensions .ts --copy-files",
     "build:watch": "babel src --out-dir build --extensions .ts --copy-files --watch",
     "build:prod": "babel src --out-dir build --extensions .ts --copy-files --minified"
@@ -12,7 +11,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.2"
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongodb": "^4.12.1",
+    "mongoose": "^6.7.3"
   },
   "devDependencies": {
     "@babel/cli": "^7.19.3",
