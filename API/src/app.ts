@@ -3,7 +3,8 @@ import dotenv from "dotenv";
 import cors from "cors";
 import connectToMongo from "./config/mongo.js";
 import bodyParser from "body-parser";
-import authRouter from "routes/auth-router.js";
+import { authRouter } from "routes";
+import { swaggerMiddleware } from "middlewares";
 
 const app = express();
 
@@ -12,5 +13,6 @@ connectToMongo();
 
 app.use(bodyParser.json());
 app.use("/api", cors(), authRouter);
+app.use("/", ...swaggerMiddleware);
 
 app.listen(4000);
