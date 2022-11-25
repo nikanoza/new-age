@@ -8,5 +8,4 @@ export type NewUser = {
 
 export interface UserType extends NewUser {
   id: string;
-  confirmed: boolean;
 }
