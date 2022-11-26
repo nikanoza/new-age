@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="main">
     <svg
       width="220"
       height="51"
@@ -32,12 +32,45 @@
         </linearGradient>
       </defs>
     </svg>
-    <form action=""></form>
+    <form class="signup-form">
+      <h3 class="form-title">Sign Up</h3>
+      <input type="text" name="firstName" placeholder="First Name" />
+      <div class="error"></div>
+      <input type="text" name="lastName" placeholder="Last Name" />
+      <div class="error"></div>
+      <input type="email" name="email" placeholder="Email" />
+      <div class="error"></div>
+      <input
+        type="date"
+        name="birthday"
+        placeholder="Birthday"
+        class="birthday"
+        min="1920-01-01"
+        :max="dateMaxValue"
+      />
+      <div class="error"></div>
+      <input type="password" name="password" placeholder="password" />
+      <div class="error"></div>
+      <button type="submit" class="submit-btn">Create an account</button>
+      <div class="already">
+        <span>Already have an account?</span>
+        <router-link to="/login">Login</router-link>
+      </div>
+    </form>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {};
+  },
+  computed: {
+    dateMaxValue() {
+      return new Date().toISOString().substr(0, 10);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>

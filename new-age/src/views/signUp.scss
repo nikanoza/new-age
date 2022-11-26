@@ -1,3 +1,69 @@
-.logo{
-    margin-top: 80px;
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .logo {
+    margin-top: 40px;
+  }
+  .signup-form {
+    width: 400px;
+    margin-top: 40px;
+    padding: 32px;
+    background-color: #161d2f;
+    border-radius: 20px;
+    .form-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+    }
+    input {
+      width: 100%;
+      height: 40px;
+      margin-top: 10px;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid #5a698f;
+      color: white;
+      font-size: 15px;
+      padding-left: 16px;
+      ::placeholder {
+        opacity: 0.5;
+      }
+    }
+    .birthday::-webkit-calendar-picker-indicator {
+        background: url(../assets/calendar.png) no-repeat;
+    }
+    .error {
+      width: 100%;
+      height: 10px;
+      color: var(--error);
+    }
+    .submit-btn{
+        margin-top: 10px;
+        width: 100%;
+        height: 48px;
+        background-color: var(--Violet);
+        border: none;
+        color: white;
+        border-radius: 6px;
+        cursor: pointer;
+        &:hover{
+            background-color: var(--Sky);
+        }
+    }
+    .already{
+      display:flex;
+      justify-content: center;
+      column-gap: 8px;
+      font-size: 15px;
+      color: white;
+      margin-top: 24px;
+      a{
+        text-decoration: none;
+        color: var(--Violet);
+      }
+    }
+  }
 }
+
