@@ -1,3 +1,27 @@
 /API/node_modules
 /API/build
 /API/.env
+
+/new-age/.DS_Store
+/new-age/node_modules
+/new-age/dist
+
+
+# local env files
+/new-age/.env.local
+/new-age/.env.*.local
+
+# Log files
+/new-age/npm-debug.log*
+/new-age/yarn-debug.log*
+/new-age/yarn-error.log*
+/new-age/pnpm-debug.log*
+
+# Editor directories and files
+/new-age/.idea
+/new-age/.vscode
+/new-age/*.suo
+/new-age/*.ntvs*
+/new-age/*.njsproj
+/new-age/*.sln
+/new-age/*.sw?
