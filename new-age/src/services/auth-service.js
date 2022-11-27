@@ -7,3 +7,11 @@ export const registration = (data) => {
 export const login = (data) => {
   return axios.post("/auth/sign-in", data);
 };
+
+export const getUser = (token) => {
+  return axios.get("/auth/me", {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+};

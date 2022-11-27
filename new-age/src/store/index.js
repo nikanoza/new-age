@@ -1,7 +1,13 @@
 const store = {
   state: {
     token: "",
-    user: {},
+    user: {
+      firstName: "",
+      lastName: "",
+      email: "",
+      birthday: "",
+      password: "",
+    },
   },
   getters: {
     getToken(state) {
@@ -15,10 +21,16 @@ const store = {
     setToken(state, payload) {
       state.token = payload;
     },
+    setUser(state, payload) {
+      state.user = { ...payload };
+    },
   },
   actions: {
     setToken(context, token) {
       context.commit("setToken", token);
+    },
+    setUser(context, userData) {
+      context.commit("setUser", userData);
     },
   },
 };
