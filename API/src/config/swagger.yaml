@@ -79,3 +79,30 @@ paths:
       responses:
         "200":
           description: get user info
+  /users/{userId}:
+    put:
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+      tags:
+        - User
+      security:
+        - bearerAuth: []
+      requestBody:
+        description: update user
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+      responses:
+        "200":
+          description: user updated successfully
