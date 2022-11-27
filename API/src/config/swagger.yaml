@@ -106,3 +106,17 @@ paths:
       responses:
         "200":
           description: user updated successfully
+    delete:
+      parameters:
+        - in: path
+          name: userId
+          schema:
+            type: string
+          required: true
+      tags:
+        - User
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: user deleted successfully

@@ -3,9 +3,7 @@ import { User } from "models";
 import { updateUserSchema } from "schemas";
 
 export const updateUser = async (req: Request, res: Response) => {
-  console.log(req.params);
   const paramsId = req.params.userId;
-  console.log(paramsId);
   const { body } = req;
 
   const validator = await updateUserSchema({ ...body, id: paramsId });
@@ -28,4 +26,18 @@ export const updateUser = async (req: Request, res: Response) => {
   };
 
   return res.status(200).json(updatedUser);
+};
+
+export const deleteUser = async (req: Request, res: Response) => {
+  const paramsId = req.params.userId;
+
+  const user = await User.findOne({ id: paramsId });
+
+  if (!user) {
+    return res.status(422).json({ message: "user with this id did not exist" });
+  }
+
+  await user.delete();
+
+  return res.status(200).json({ message: "user deleted successfully" });
 };
