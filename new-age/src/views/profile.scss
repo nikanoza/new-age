@@ -30,7 +30,6 @@
         button{
           height: 48px;
           border: none;
-          color: white;
           border-radius: 6px;
           cursor: pointer;
           padding: 0 20px;
@@ -39,9 +38,17 @@
         }
         .edit{
           background-color: var(--Blue);
+          a{
+            text-decoration: none;
+            color: white;
+          }
         }
         .delete{
           background-color: var(--error);
+          a{
+            text-decoration: none;
+            color: white;
+          }
         }
       }
     }

@@ -38,8 +38,12 @@
       <span class="info">Birthday: {{ birthday }}</span>
       <span class="info">email: {{ email }}</span>
       <div class="buttons">
-        <button class="edit">Edit</button>
-        <button class="delete">Delete Account</button>
+        <button class="edit">
+          <router-link :to="editRedirectLink">Edit</router-link>
+        </button>
+        <button class="delete">
+          <router-link :to="deleteRedirectLink">Delete Account</router-link>
+        </button>
       </div>
     </div>
   </div>
@@ -66,6 +70,12 @@ export default {
     },
     email() {
       return this.user.email;
+    },
+    editRedirectLink() {
+      return "/profile/" + this.user.id + "/edit";
+    },
+    deleteRedirectLink() {
+      return "/profile/" + this.user.id + "/delete";
     },
   },
   methods: {
