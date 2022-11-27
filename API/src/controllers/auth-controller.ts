@@ -72,5 +72,6 @@ export const SignIn = async (req: Request, res: Response) => {
 export const authMe = async (req: Request, res: Response) => {
   const { authorization } = req.headers;
   const [, token] = authorization ? authorization.trim().split(" ") : [];
-  console.log(token);
+  const user = jwt.decode(token);
+  return res.status(200).json(user);
 };

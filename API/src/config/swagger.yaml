@@ -9,7 +9,12 @@ servers:
     description: production server
   - url: http://localhost:4000/api
     description: local server
-
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
 paths:
   /auth/sign-up:
     post:
@@ -65,3 +70,12 @@ paths:
       responses:
         "200":
           description: user login successfully
+  /auth/me:
+    get:
+      tags:
+        - Auth
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: get user info
