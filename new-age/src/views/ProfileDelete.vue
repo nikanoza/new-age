@@ -44,7 +44,7 @@
   </div>
 </template>
 <script>
-import { getUser } from "../services";
+import { deleteAccount, getUser } from "../services";
 export default {
   created() {
     this.fetchUser();
@@ -73,7 +73,27 @@ export default {
         }
       }
     },
-    deleteUser() {},
+    async deleteUser() {
+      try {
+        const user = this.$store.getters["getUserInfo"];
+        const token = this.$store.getters["getToken"];
+        console.log(user, token);
+        await deleteAccount(user.id, token);
+        const clearUser = {
+          firstName: "",
+          lastName: "",
+          email: "",
+          birthday: "",
+          password: "",
+        };
+        this.$store.dispatch("setUser", clearUser);
+        this.$store.dispatch("setToken", "");
+        this.$cookies.remove("token");
+        this.$router.push("/sign-up");
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 };
 </script>

@@ -7,3 +7,11 @@ export const updateUser = (data, id, token) => {
     },
   });
 };
+
+export const deleteAccount = (id, token) => {
+  return axios.delete("/users/" + id, {
+    headers: {
+      authorization: `Bearer ${token}`,
+    },
+  });
+};
