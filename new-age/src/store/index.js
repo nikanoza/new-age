@@ -16,6 +16,12 @@ const store = {
     getUserInfo(state) {
       return state.user;
     },
+    getFirstName(state) {
+      return state.user.firstName;
+    },
+    getLastName(state) {
+      return state.user.lastName;
+    },
   },
   mutations: {
     setToken(state, payload) {
