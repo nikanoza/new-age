@@ -94,10 +94,10 @@ export default {
       const formIsValid =
         this.emailIsValid.status && this.passwordIsValid.status;
       if (formIsValid) {
-        const userData = {
-          email: this.email,
-          password: this.password,
-        };
+        // const userData = {
+        //   email: this.email,
+        //   password: this.password,
+        // };
         try {
           // await registration(newUser);
           // this.$router.push("/sign-in");

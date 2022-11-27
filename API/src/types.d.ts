@@ -9,3 +9,8 @@ export type NewUser = {
 export interface UserType extends NewUser {
   id: string;
 }
+
+export type LoginUserType = {
+  email: string;
+  password: string;
+};
