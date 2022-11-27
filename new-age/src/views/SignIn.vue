@@ -32,24 +32,8 @@
         </linearGradient>
       </defs>
     </svg>
-    <form class="signup-form" @submit.prevent="register">
-      <h3 class="form-title">Sign Up</h3>
-      <input
-        type="text"
-        name="firstName"
-        placeholder="First Name"
-        v-model.trim="firstName"
-        :class="firstNameErrorStyle"
-      />
-      <div class="error">{{ firstNameIsValid.message }}</div>
-      <input
-        type="text"
-        name="lastName"
-        placeholder="Last Name"
-        v-model.trim="lastName"
-        :class="lastNameErrorStyle"
-      />
-      <div class="error">{{ lastNameIsValid.message }}</div>
+    <form class="signup-form" @submit.prevent="login">
+      <h3 class="form-title">Sign In</h3>
       <input
         type="email"
         name="email"
@@ -59,17 +43,6 @@
       />
       <div class="error">{{ emailIsValid.message }}</div>
       <input
-        type="date"
-        name="birthday"
-        placeholder="Birthday"
-        class="birthday"
-        min="1920-01-01"
-        :max="dateMaxValue"
-        v-model="birthday"
-        :class="birthdayErrorStyle"
-      />
-      <div class="error">{{ birthdayIsValid.message }}</div>
-      <input
         type="password"
         name="password"
         placeholder="password"
@@ -77,39 +50,22 @@
         :class="passwordErrorStyle"
       />
       <div class="error">{{ passwordIsValid.message }}</div>
-      <button type="submit" class="submit-btn">Create an account</button>
+      <button type="submit" class="submit-btn">Sign In</button>
       <div class="already">
-        <span>Already have an account?</span>
-        <router-link to="/sign-in">Login</router-link>
+        <span>Did not have an account?</span>
+        <router-link to="/sign-up">Register</router-link>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import { registration } from "../services";
-
 export default {
   data() {
     return {
-      firstName: "",
-      lastName: "",
       email: "",
-      birthday: "",
       password: "",
-      firstNameIsValid: {
-        status: true,
-        message: "",
-      },
-      lastNameIsValid: {
-        status: true,
-        message: "",
-      },
       emailIsValid: {
-        status: true,
-        message: "",
-      },
-      birthdayIsValid: {
         status: true,
         message: "",
       },
@@ -121,20 +77,8 @@ export default {
     };
   },
   computed: {
-    dateMaxValue() {
-      return new Date().toISOString().substr(0, 10);
-    },
-    firstNameErrorStyle() {
-      return !this.firstNameIsValid.status ? "invalid" : "";
-    },
-    lastNameErrorStyle() {
-      return !this.lastNameIsValid.status ? "invalid" : "";
-    },
     emailErrorStyle() {
       return !this.emailIsValid.status ? "invalid" : "";
-    },
-    birthdayErrorStyle() {
-      return !this.birthdayIsValid.status ? "invalid" : "";
     },
     passwordErrorStyle() {
       return !this.passwordIsValid.status ? "invalid" : "";
@@ -144,66 +88,23 @@ export default {
     async register() {
       if (!this.trySubmitted) {
         this.trySubmitted = true;
-        this.validateFirstName();
-        this.validateLastName();
         this.validateEmail();
-        this.validateBirthday();
         this.validatePassword();
       }
       const formIsValid =
-        this.firstNameIsValid.status &&
-        this.lastNameIsValid.status &&
-        this.emailIsValid.status &&
-        this.birthdayIsValid.status &&
-        this.passwordIsValid.status;
+        this.emailIsValid.status && this.passwordIsValid.status;
       if (formIsValid) {
-        const newUser = {
-          firstName: this.firstName,
-          lastName: this.lastName,
-          birthday: new Date(this.birthday),
+        const userData = {
           email: this.email,
           password: this.password,
         };
         try {
-          await registration(newUser);
-          this.$router.push("/sign-in");
+          // await registration(newUser);
+          // this.$router.push("/sign-in");
         } catch (error) {
           console.log(error);
         }
       }
-    },
-    validateFirstName() {
-      const regex = /^[a-zA-Z]*$/;
-
-      if (this.firstName.length === 0) {
-        this.firstNameIsValid.status = false;
-        this.firstNameIsValid.message = "*first name is required";
-        return;
-      }
-      if (!regex.test(this.firstName)) {
-        this.firstNameIsValid.status = false;
-        this.firstNameIsValid.message =
-          "*must be includes english letters only";
-        return;
-      }
-      this.firstNameIsValid.status = true;
-      this.firstNameIsValid.message = "";
-    },
-    validateLastName() {
-      const regex = /^[a-zA-Z]*$/;
-
-      if (this.lastName.length === 0) {
-        this.lastNameIsValid.status = false;
-        this.lastNameIsValid.message = "*last name is required";
-        return;
-      }
-      if (!regex.test(this.lastName)) {
-        this.lastNameIsValid.status = false;
-        this.lastNameIsValid.message = "*must be includes english letters only";
-        return;
-      }
-      this.lastNameIsValid.status = true;
-      this.lastNameIsValid.message = "";
     },
     validateEmail() {
       if (this.email.length === 0) {
@@ -211,22 +112,8 @@ export default {
         this.emailIsValid.message = "*email is required";
         return;
       }
-      if (!this.email.endsWith("@newage.io")) {
-        this.emailIsValid.status = false;
-        this.emailIsValid.message = "*email must be finished with '@newage.io'";
-        return;
-      }
       this.emailIsValid.status = true;
       this.emailIsValid.message = "";
-    },
-    validateBirthday() {
-      if (this.birthday.length === 0) {
-        this.birthdayIsValid.status = false;
-        this.birthdayIsValid.message = "*birthday is required";
-        return;
-      }
-      this.birthdayIsValid.status = true;
-      this.birthdayIsValid.message = "";
     },
     validatePassword() {
       if (this.password.length === 0) {
@@ -234,41 +121,14 @@ export default {
         this.passwordIsValid.message = "*password is required";
         return;
       }
-      if (this.password.length < 8) {
-        this.passwordIsValid.status = false;
-        this.passwordIsValid.message =
-          "*password must be includes 8 or more characters";
-        return;
-      }
-      if (this.password.length > 15) {
-        this.passwordIsValid.status = false;
-        this.passwordIsValid.message =
-          "*password must be includes 15 or less characters";
-        return;
-      }
       this.passwordIsValid.status = true;
       this.passwordIsValid.message = "";
     },
   },
   watch: {
-    firstName() {
-      if (this.trySubmitted) {
-        this.validateFirstName();
-      }
-    },
-    lastName() {
-      if (this.trySubmitted) {
-        this.validateLastName();
-      }
-    },
     email() {
       if (this.trySubmitted) {
         this.validateEmail();
-      }
-    },
-    birthday() {
-      if (this.trySubmitted) {
-        this.validateBirthday();
       }
     },
     password() {
@@ -281,5 +141,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import "signUp.scss";
+@import "signIn.scss";
 </style>
