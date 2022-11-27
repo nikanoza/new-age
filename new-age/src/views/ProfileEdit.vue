@@ -55,7 +55,7 @@
   </div>
 </template>
 <script>
-import { getUser } from "../services";
+import { getUser, updateUser } from "../services";
 export default {
   data() {
     return {
@@ -120,13 +120,21 @@ export default {
       const formIsValid =
         this.firstNameIsValid.status && this.lastNameIsValid.status;
       if (formIsValid) {
-        // const newUserInfo = {
-        //   firstName: this.firstName,
-        //   lastName: this.lastName,
-        // };
+        const newUserInfo = {
+          firstName: this.firstName,
+          lastName: this.lastName,
+        };
+        const user = this.$store.getters["getUserInfo"];
+        const token = this.$store.getters["getToken"];
         try {
-          // await registration(newUser);
-          // this.$router.push("/sign-in");
+          await updateUser(newUserInfo, user.id, token);
+          const updatedUser = {
+            ...user,
+            firstName: this.firstName,
+            lastName: this.lastName,
+          };
+          this.$store.dispatch("setUser", updatedUser);
+          this.$router.push("/profile");
         } catch (error) {
           console.log(error);
         }

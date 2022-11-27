@@ -80,21 +80,26 @@ export default {
   },
   methods: {
     async fetchUser() {
+      const user = this.$store.getters["getUserInfo"];
       const storeToken = this.$store.getters["getToken"];
       let token;
-      if (storeToken) {
-        token = storeToken;
-      } else {
-        const cookieToken = this.$cookies.get("token");
-        if (!cookieToken) {
-          this.$router.push("/sign-up");
+      if (user.firstName.length === 0) {
+        if (storeToken) {
+          token = storeToken;
+        } else {
+          const cookieToken = this.$cookies.get("token");
+          if (!cookieToken) {
+            this.$router.push("/sign-up");
+          }
+          token = cookieToken;
+          this.$store.dispatch("setToken", token);
         }
-        token = cookieToken;
-        this.$store.dispatch("setToken", token);
+        const { data } = await getUser(token);
+        this.$store.dispatch("setUser", data);
+        this.user = data;
+      } else {
+        this.user = user;
       }
-      const { data } = await getUser(token);
-      this.$store.dispatch("setUser", data);
-      this.user = data;
     },
   },
 };
