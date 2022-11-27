@@ -68,3 +68,9 @@ export const SignIn = async (req: Request, res: Response) => {
     .status(401)
     .json({ message: "please, provide correct credentials..." });
 };
+
+export const authMe = async (req: Request, res: Response) => {
+  const { authorization } = req.headers;
+  const [, token] = authorization ? authorization.trim().split(" ") : [];
+  console.log(token);
+};
