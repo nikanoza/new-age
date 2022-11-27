@@ -101,6 +101,9 @@ export default {
         };
         try {
           const response = await login(userData);
+          const token = response.data.token;
+          this.$store.dispatch("setToken", token);
+          this.$cookies.set("token", token, "1h");
         } catch (error) {
           console.log(error);
         }
