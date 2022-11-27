@@ -5,6 +5,7 @@ import App from "./App.vue";
 import "./main.scss";
 import SignUp from "./views/SignUp.vue";
 import SignIn from "./views/SignIn.vue";
+import ProfilePage from "./views/ProfilePage.vue";
 import Vuex from "vuex";
 import vueStore from "./store/index.js";
 
@@ -18,6 +19,7 @@ const router = new VueRouter({
     { path: "/", redirect: "/sign-up" },
     { path: "/sign-up", component: SignUp },
     { path: "/sign-in", component: SignIn },
+    { path: "/profile", component: ProfilePage },
   ],
 });
 

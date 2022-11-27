@@ -104,8 +104,17 @@ export default {
           const token = response.data.token;
           this.$store.dispatch("setToken", token);
           this.$cookies.set("token", token, "1h");
+          this.$router.push("/profile");
         } catch (error) {
-          console.log(error);
+          const err = error.response.data;
+          const errorIsArray = Array.isArray(err);
+          if (errorIsArray) {
+            this.emailIsValid.status = false;
+            this.emailIsValid.message = "*user with this email did not exists";
+          } else {
+            this.passwordIsValid.status = false;
+            this.passwordIsValid.message = "*password is incorrect";
+          }
         }
       }
     },
