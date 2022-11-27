@@ -14,3 +14,9 @@ export type LoginUserType = {
   email: string;
   password: string;
 };
+
+export type UpdateUserType = {
+  firstName: string;
+  lastName: string;
+  id: string;
+};
