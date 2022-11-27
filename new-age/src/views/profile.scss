@@ -1,0 +1,48 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .logo {
+      margin-top: 40px;
+    }
+    .user-info{
+      width: 400px;
+      margin-top: 40px;
+      padding: 32px;
+      background-color: #161d2f;
+      border-radius: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      .avatar{
+        width: 100px;
+      }
+      .info{
+        font-size: 20px;
+        color: white;
+        margin-top: 20px;
+      }
+      .buttons{
+        display: flex;
+        column-gap: 10px;
+        align-self: flex-end;
+        margin-top: 30px;
+        button{
+          height: 48px;
+          border: none;
+          color: white;
+          border-radius: 6px;
+          cursor: pointer;
+          padding: 0 20px;
+          font-size: 18px;
+          font-weight: 500;
+        }
+        .edit{
+          background-color: var(--Blue);
+        }
+        .delete{
+          background-color: var(--error);
+        }
+      }
+    }
+}
