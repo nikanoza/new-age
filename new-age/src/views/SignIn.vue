@@ -32,7 +32,7 @@
         </linearGradient>
       </defs>
     </svg>
-    <form class="signup-form" @submit.prevent="login">
+    <form class="signup-form" @submit.prevent="loginHandler">
       <h3 class="form-title">Sign In</h3>
       <input
         type="email"
@@ -60,6 +60,7 @@
 </template>
 
 <script>
+import { login } from "../services";
 export default {
   data() {
     return {
@@ -85,7 +86,7 @@ export default {
     },
   },
   methods: {
-    async register() {
+    async loginHandler() {
       if (!this.trySubmitted) {
         this.trySubmitted = true;
         this.validateEmail();
@@ -94,13 +95,12 @@ export default {
       const formIsValid =
         this.emailIsValid.status && this.passwordIsValid.status;
       if (formIsValid) {
-        // const userData = {
-        //   email: this.email,
-        //   password: this.password,
-        // };
+        const userData = {
+          email: this.email,
+          password: this.password,
+        };
         try {
-          // await registration(newUser);
-          // this.$router.push("/sign-in");
+          const response = await login(userData);
         } catch (error) {
           console.log(error);
         }
