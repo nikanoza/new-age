@@ -43,3 +43,25 @@ paths:
       responses:
         "201":
           description: new user create successfully
+  /auth/sign-in:
+    post:
+      tags:
+        - Auth
+      requestBody:
+        description: login
+        required: true
+        content:
+          application/json:
+            schema:
+              type: "object"
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+            example:
+              email: albus@newage.io
+              password: "harry potter"
+      responses:
+        "200":
+          description: user login successfully
