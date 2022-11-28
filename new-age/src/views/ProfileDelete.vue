@@ -77,7 +77,6 @@ export default {
       try {
         const user = this.$store.getters["getUserInfo"];
         const token = this.$store.getters["getToken"];
-        console.log(user, token);
         await deleteAccount(user.id, token);
         const clearUser = {
           firstName: "",

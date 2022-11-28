@@ -16,4 +16,4 @@ app.use("/api", cors(), authRouter);
 app.use("/api", cors(), userRouter);
 app.use("/", ...swaggerMiddleware);
 
-app.listen(4000);
+app.listen(process.env.PORT || 4000);

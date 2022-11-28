@@ -26,3 +26,8 @@
 /new-age/*.njsproj
 /new-age/*.sln
 /new-age/*.sw?
+
+#deploy
+/new-age/.firebase
+/new-age/firebase.json
+/new-age/.firebaserc
